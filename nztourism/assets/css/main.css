@@ -1,0 +1,342 @@
+:root {
+  --white: #ffffff;
+  --darker: #171717;
+  --btn: #41913c;
+  --dark-green: #285724;
+  --red: #ff0000;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #000000;
+  min-height: 100vh;
+}
+
+h2 {
+  color: var(--darker);
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+h3 {
+  color: var(--dark);
+  font-size: 1.65rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+}
+
+h5 {
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 1.25rem;
+  margin-top: 0.625rem;
+}
+
+h4::first-letter,
+h5::first-letter {
+  text-transform: uppercase;
+}
+
+input,
+label {
+  text-transform: capitalize;
+}
+
+label {
+  font-weight: 700;
+}
+
+p {
+  color: var(--darker);
+}
+
+/* Styling for Top Black Nav Bar */
+.top-of-page-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem;
+  background-color: var(--darker);
+}
+
+/* Styling for Top Black Nav Bar elements */
+.nz-tourism-style {
+  color: var(--white);
+  background-color: var(--darker);
+  text-transform: capitalize;
+  font-size: 1rem;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Media query to make NZ Tourism text within the Top Black Nav Bar smaller on smaller devices */
+@media (max-width: 340px) {
+  .nz-tourism-style {
+    font-size: 0.5rem;
+  }
+}
+/* Styling to insert picture of Mt Cook and align header text center */
+.main-header {
+  background-image: url(../images/mt_cook.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  padding: 0.625rem;
+  height: 18.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* Grid to position intro 'Plan your trip and travelling expense.....etc */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* ITINERARY AREA */
+/* itinery wrapper styling */
+.itinery-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2.5rem;
+  min-height: 25rem;
+}
+
+/* Styling for left hand side of itinerary (form area) */
+#itinery-grid-left {
+  width: 48%;
+  height: 100%;
+  padding: 1.5rem;
+  background-color: var(--darker);
+}
+
+#itinery-grid-left h3 {
+  color: var(--white);
+}
+
+/* FORM */
+form {
+  width: 100%;
+  margin: 2.5rem auto;
+}
+
+/* Make label text white */
+.form-horizontal .col-form-label {
+  color: var(--white);
+}
+
+/* CALENDAR  */
+/* Change font/padding in calendar */
+.ui-datepicker {
+  font-size: 1.125rem !important;
+  padding: 0.25rem;
+  z-index: 1;
+}
+
+/* SEARCH TRANSPORT BUTTON */
+#submitBtn {
+  display: block;
+  width: 60%;
+  background-color: var(--btn);
+  color: var(--white);
+  height: 2.5rem;
+  border: none;
+  border-radius: 0.3125rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+/* Styling for button 'Search Transport' when pointer hovers over button */
+#submitBtn:hover {
+  background-color: var(--dark-green);
+  transform: scale(1.05);
+  transition-duration: 100ms;
+  transition: 0.3s ease-in-out;
+}
+
+/* GOOGLE MAPS AREA */
+#googleMap {
+  width: 48%;
+  height: auto;
+  min-height: 18.75rem;
+}
+
+/* Styling for Validation Error Messages when required input from the user is missed (left blank)  */
+.alert-info {
+  width: 100%;
+  background-color: var(--white);
+  color: var(--darker);
+  padding: 1.5rem;
+  line-height: 2;
+  border-radius: 0.3125rem;
+}
+
+/* Results Area */
+.results {
+  display: none;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  padding: 0 2.5rem;
+}
+
+#results {
+  display: none;
+}
+
+#ResultContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 90%;
+  height: auto;
+  margin: 2rem auto;
+  gap: 1.25rem;
+}
+
+@media (max-width: 1200px) {
+  #ResultContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+#ResultContainer div {
+  padding: 1.25rem;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+}
+
+#ResultContainer img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.3125rem;
+}
+
+#TotalPrice,
+#TotalFuel,
+#Total {
+  margin: unset;
+  font-weight: 700;
+}
+
+#TotalPrice {
+  margin-top: 1.25rem;
+}
+
+/* Media quries for Mobile Devices */
+@media not all and (min-width: 900px) {
+  .top-nav h5 {
+    font-size: smaller;
+  }
+
+  .form-horizontal {
+    padding: 1.25rem;
+  }
+
+  #itinery-grid-left,
+  #googleMap {
+    width: 100%;
+    padding: 0.625rem;
+  }
+
+  #googleMap {
+    height: 37.5rem;
+  }
+
+  #submitBtn {
+    font-size: 0.875rem;
+  }
+}
+
+form .error {
+  color: var(--red);
+  font-weight: 400;
+}
+
+/* Flex wrapper (layout) inside Grid */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #000000;
+  justify-content: space-around;
+  padding-bottom: 1.25rem;
+}
+
+/* Media query to change links in footer to a single column */
+@media (max-width: 800px) {
+  .footer-container {
+    justify-content: left;
+    padding-left: 1.25rem;
+    flex-direction: column;
+  }
+}
+
+/* Media query to resize image for small screens */
+@media (max-width: 800px) {
+  .footer-logo-image {
+    width: 14.375rem;
+    height: 3.75rem;
+  }
+}
+
+/* Positioning of links into columns */
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.25rem;
+  padding-right: 2.5rem;
+}
+
+/* Styling for links */
+.footer-column a {
+  color: #ffffff;
+  text-decoration: none;
+  padding-bottom: 0.3125rem;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.footer-column a::first-letter {
+  text-transform: capitalize;
+}
+
+/* Styling and call to action when pointer hovers over links */
+.footer-column a:hover {
+  text-decoration: underline;
+  transition: 0.3s ease-in-out;
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="The development of this Website is specifically for a Youbee assessment called Diploma in Web and UX Design Module 2 Foundation Coding on the 18th December 2022" />
+  <meta name="copyright" content="Vaders Development" />
+  <meta name="robots" content="index" />
+  <meta name="author" content="Dan Wilkey, daniel.wilkey@gmail.com" />
+  <meta name="rating" content="General" />
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0KKMIAFnJscN6e326hdryObMYLDKGKa0&libraries=places"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/dot-luv/jquery-ui.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="icon" href="./assets/icons/silver_fern.png" />
+  <script src="./assets/js/script.js" defer></script>
+  <title>New Zealand Tourism Transport Web Application</title>
+</head>
+
+<body>
+  <header>
+    <div class="top-of-page-header">
+      <div>
+        <a href="https://www.newzealand.com/nz/"><img src="./assets/images/header_logosm.jpg"
+            alt="new zealand tourism brand logo 100 percent pure new zealand" /></a>
+      </div>
+      <div>
+        <a class="nz-tourism-style" href="https://www.newzealand.com/nz/">new zealand tourism</a>
+      </div>
+    </div>
+    <div class="main-header">
+      <h1>New Zealand Tourism</h1>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h4>
+        plan your trip and travelling expenses by entering your information
+        below
+      </h4>
+    </section>
+    <!-- Iterney Section -->
+    <!-- itinery section  -->
+    <section class="itinery-wrapper">
+      <div id="itinery-grid-left">
+        <h3 class="selectPickUpDropOff">itinerary</h3>
+        <div id="Itinery">
+          <div class="itinerary-locations">
+            <form class="form-horizontal" name="myForm" id="myForm">
+              <!-- depart calendar -->
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col">
+                    <label for="startDate" class="col-xs-4 col-form-label">depart</label>
+                    <div class="col-xs-8">
+                      <input class="form-control form-control-sm loc" type="text" id="startDate" name="startDate"
+                        placeholder="Departure date" autocomplete="off" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- return calendar -->
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col">
+                    <label for="endDate" class="col-xs-4 col-form-label">return</label>
+                    <div class="col-xs-8">
+                      <input class="form-control form-control-sm loc" type="text" id="endDate" name="endDate"
+                        placeholder="Return date" autocomplete="off" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- passenger selector -->
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col">
+                    <label for="passengers" class="col-xs-4 col-form-label">
+                      passengers</label>
+                    <div class="col-xs-8">
+                      <select id="passengers" class="form-control form-control-sm col-xs-4" name="passengers" required>
+                        <option value="">Select Number Of Passengers</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- start location -->
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col">
+                    <label for="from" class="col-xs-4 col-form-label">Origin</label>
+                    <div class="col-xs-8">
+                      <input type="text" id="from" name="from" placeholder="Enter your starting point"
+                        class="form-control loc form-control-sm location-field" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- final location -->
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col">
+                    <label for="to" class="col-xs-4 col-form-label">Destination</label>
+                    <div class="col-xs-8">
+                      <input type="text" id="to" name="to" placeholder="Enter your final destination"
+                        class="form-control form-control-sm loc location-field" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div>
+              <button id="submitBtn" class="btn btn-info btn-lg">
+                Search transport
+              </button>
+            </div>
+            <!-- div to show distance/time results from google maps -->
+            <div id="output">
+              <p id="locResult"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="googleMap"></div>
+    </section>
+    <!-- results area -->
+    <section class="results">
+      <h2>results</h2>
+      <div id="ResultContainer"></div>
+    </section>
+
+    <!-- Output results for From, To, Driving distance and duration -->
+    <div id="output">
+      <p id="locResult"></p>
+    </div>
+    </form>
+    <!-- <div id="googleMap"></div> -->
+    </section>
+    <!-- Results Container -->
+    <!-- <section class="results">
+        <h2>results</h2>
+        <div id="ResultContainer"></div>
+      </section> -->
+  </main>
+
+  <footer class="linked-footer">
+    <nav class="footer-container">
+      <div class="footer-column">
+        <h5>find us on</h5>
+        <a href="https://twitter.com/purenewzealand"><i class="fa fa-brands fa-twitter"></i> twitter</a>
+        <a href="https://www.instagram.com/purenewzealand/"><i class="fa fa-brands fa-instagram"></i> instagram</a>
+        <a href="https://www.facebook.com/purenewzealand"><i class="fa fa-brands fa-facebook-f"></i> facebook</a>
+        <a href="https://www.youtube.com/purenewzealand"><i class="fa fa-brands fa-youtube"></i> youTube</a>
+      </div>
+      <div class="footer-column">
+        <h5>contact us</h5>
+        <a href="https://www.newzealand.com/nz/form/request-a-map/">request a map</a>
+        <a href="https://www.newzealand.com/nz/form/site-feedback/">site feedback</a>
+        <a href="https://www.newzealand.com/nz/form/report-a-problem/">need help?</a>
+      </div>
+      <div class="footer-column">
+        <h5>help</h5>
+        <a href="https://www.newzealand.com/nz/utilities/frequently-asked-questions/">FAQs</a>
+        <a href="https://www.newzealand.com/nz/utilities/about-newzealand/">about newzealand.com</a>
+        <a href="https://www.newzealand.com/nz/utilities/operator-help/">adding your business and deals</a>
+        <a href="https://www.newzealand.com/nz/utilities/linking-to-newzealand/">linking to newzealand.com</a>
+        <a href="https://www.newzealand.com/nz/utilities/terms-of-use/">terms of use</a>
+        <a href="https://www.newzealand.com/nz/utilities/privacy-policy/">privacy Policy</a>
+        <a href="https://www.newzealand.com/nz/utilities/cookies/">cookies</a>
+
+        <a href="https://www.newzealand.com/nz/utilities/cookies/">manage privacy settings</a>
+      </div>
+      <div class="footer-column">
+        <h5>our other sites</h5>
+        <a href="https://media.newzealand.com/">media</a>
+
+        <a href="https://visuals.newzealand.com/">the Visual Library</a>
+
+        <a href="https://traveltrade.newzealand.com/">Travel Trade</a>
+
+        <a href="https://businessevents.newzealand.com/">Business Events</a>
+
+        <a href="https://www.tourismnewzealand.com/">corporate website</a>
+
+        <a href="https://register.newzealand.com/">Tourism Business Database</a>
+      </div>
+      <div class="footer-column">
+        <img class="footer-logo-image" src="./assets/images/logo_footersm.jpg"
+          alt="log with silver fern and 100 persent new zealand" />
+      </div>
+    </nav>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <script src="./assets/js/form-validation.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
