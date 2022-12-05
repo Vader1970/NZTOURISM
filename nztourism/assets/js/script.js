@@ -24,7 +24,7 @@ $(document).ready(function () {
   });
 });
 
-// Fuction to get values from itinery input fields and display the results //
+// Fuction to get values from itinery input fields and display the results of Transport options //
 
 function getValShowResult() {
   // Get values from the form and call showResultContainer function
@@ -106,7 +106,7 @@ const transport = [
   },
 ];
 
-// Loop through Transport options and create elements (under '#ResultContainer') using the above keys and properties so to print on html transport data
+// Loop through Transport object (inside of an array) defined by user input and create elements (div) so to print on html about transport specifications i.e capacity, fuel consumption and etc
 const results = document.querySelector("#ResultContainer");
 for (let index in transport) {
   const option = transport[index];
@@ -119,7 +119,7 @@ for (let index in transport) {
   const imagePath = option.Image;
 
   let inner = "";
-  //Add image
+  //Add image and append
   const image = document.createElement("img");
   image.setAttribute("src", imagePath);
   image.setAttribute("alt", option.Vehicle);
@@ -293,7 +293,7 @@ function calcRoute() {
       map.setCenter({ lat: -36.8509, lng: 174.7645 });
       // Show error message if data is not received
       output.innerHTML =
-        "<div class='alert-danger'><i class='fa-solid fa-triangle-exclamation'></i> Could not retrieve driving distance. </div>";
+        "<div class='alert-danger'>Could not retrieve driving distance.</div>";
     }
   });
 }

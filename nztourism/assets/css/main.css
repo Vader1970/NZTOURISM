@@ -47,7 +47,6 @@ h3 {
 h4 {
   font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 2.5rem;
 }
 
 h5 {
@@ -125,7 +124,7 @@ p {
 }
 
 /* ITINERARY AREA */
-/* itinery wrapper styling */
+/* itinery wrapper alignment */
 .itinery-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -135,14 +134,14 @@ p {
 }
 
 /* Styling for left hand side of itinerary (form area) */
-#itinery-grid-left {
+.itinery-form {
   width: 48%;
   height: 100%;
   padding: 1.5rem;
   background-color: var(--darker);
 }
 
-#itinery-grid-left h3 {
+.itinery-form h3 {
   color: var(--white);
 }
 
@@ -153,7 +152,8 @@ form {
 }
 
 /* Make label text white */
-.form-horizontal .col-form-label {
+.form-labels-styling,
+.col-form-label {
   color: var(--white);
 }
 
@@ -214,10 +214,6 @@ form {
   padding: 0 2.5rem;
 }
 
-#results {
-  display: none;
-}
-
 #ResultContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -268,7 +264,7 @@ form {
     padding: 1.25rem;
   }
 
-  #itinery-grid-left,
+  .itinery-form,
   #googleMap {
     width: 100%;
     padding: 0.625rem;

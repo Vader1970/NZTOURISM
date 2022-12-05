@@ -4,7 +4,7 @@ const validationConfig = {
   rules: {
     departdate: "required",
     returndate: "required",
-    passeners: "required",
+    passengers: "required",
     from: "required",
     to: "required",
   },
@@ -12,7 +12,7 @@ const validationConfig = {
   messages: {
     departdate: "Please select your start date",
     returndate: "Please select your retun date",
-    passeners: "Please select number of passengers",
+    passengers: "Please select number of passengers",
     from: "Please select starting location",
     to: "Please select destination",
   },

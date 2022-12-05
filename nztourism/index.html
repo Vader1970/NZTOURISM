@@ -26,6 +26,7 @@
 
 <body>
   <header>
+    <!-- Top of the page (header) Black Nav Bar -->
     <div class="top-of-page-header">
       <div>
         <a href="https://www.newzealand.com/nz/"><img src="./assets/images/header_logosm.jpg"
@@ -35,6 +36,7 @@
         <a class="nz-tourism-style" href="https://www.newzealand.com/nz/">new zealand tourism</a>
       </div>
     </div>
+    <!-- Main Header -->
     <div class="main-header">
       <h1>New Zealand Tourism</h1>
     </div>
@@ -47,15 +49,14 @@
         below
       </h4>
     </section>
-    <!-- Iterney Section -->
     <!-- itinery section  -->
     <section class="itinery-wrapper">
-      <div id="itinery-grid-left">
-        <h3 class="selectPickUpDropOff">itinerary</h3>
-        <div id="Itinery">
-          <div class="itinerary-locations">
-            <form class="form-horizontal" name="myForm" id="myForm">
-              <!-- depart calendar -->
+      <div class="itinery-form">
+        <h3>itinerary</h3>
+        <div>
+          <div>
+            <form class="form-labels-styling" name="myForm" id="myForm">
+              <!-- startDate calendar -->
               <div class="form-group">
                 <div class="form-row">
                   <div class="col">
@@ -67,7 +68,7 @@
                   </div>
                 </div>
               </div>
-              <!-- return calendar -->
+              <!-- endDate calendar -->
               <div class="form-group">
                 <div class="form-row">
                   <div class="col">
@@ -99,7 +100,7 @@
                   </div>
                 </div>
               </div>
-              <!-- start location -->
+              <!-- Origin - from location -->
               <div class="form-group">
                 <div class="form-row">
                   <div class="col">
@@ -111,7 +112,7 @@
                   </div>
                 </div>
               </div>
-              <!-- final location -->
+              <!-- Destination - to location -->
               <div class="form-group">
                 <div class="form-row">
                   <div class="col">
@@ -125,40 +126,30 @@
               </div>
             </form>
             <div>
+              <!-- Call calcRoute function inside form-validation.js - else return validation errors  -->
               <button id="submitBtn" class="btn btn-info btn-lg">
                 Search transport
               </button>
             </div>
-            <!-- div to show distance/time results from google maps -->
-            <div id="output">
-              <p id="locResult"></p>
-            </div>
+            <!-- div to show results for From:, To:, Driving distance and Duration: from google maps API -->
+            <div id="output"></div>
           </div>
         </div>
       </div>
+      <!-- To display googleMap area -->
       <div id="googleMap"></div>
     </section>
-    <!-- results area -->
+    <!-- Results area for list of Transport define by user input-->
     <section class="results">
       <h2>results</h2>
       <div id="ResultContainer"></div>
     </section>
 
-    <!-- Output results for From, To, Driving distance and duration -->
-    <div id="output">
-      <p id="locResult"></p>
-    </div>
     </form>
-    <!-- <div id="googleMap"></div> -->
     </section>
-    <!-- Results Container -->
-    <!-- <section class="results">
-        <h2>results</h2>
-        <div id="ResultContainer"></div>
-      </section> -->
   </main>
 
-  <footer class="linked-footer">
+  <footer>
     <nav class="footer-container">
       <div class="footer-column">
         <h5>find us on</h5>
