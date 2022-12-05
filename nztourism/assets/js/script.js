@@ -1,4 +1,4 @@
-/// Date Range Picker Function (jQuery) to select Depart: startDate and  from and Return: endDate from a drop-down calendar //
+/// Date Range Picker Function (jQuery plugin) to select Depart: startDate and Return: endDate from a drop-down calendar //
 
 //Depart date
 $(document).ready(function () {
@@ -25,30 +25,27 @@ $(document).ready(function () {
 });
 
 // Fuction to get values from itinery input fields and display the results of Transport options //
-
 function getValShowResult() {
   // Get values from the form and call showResultContainer function
-  const passengers = $("#passengers").val();
   const departDate = $("#startDate").val();
   const returnDate = $("#endDate").val();
-
-  //Change format to 'YYYY/M/D 00:00:00' (calling convertDateTime function below)
+  const passengerNumber = $("#passengers").val();
+  //Standardize time and and format for NZ
   const departDateTime = new Date(convertDateTime(departDate, "10:00"));
   const returnDateTime = new Date(convertDateTime(returnDate, "10:00"));
 
   //Calculate rental period from those dates
-  let duration = (returnDateTime - departDateTime) / (1000 * 60 * 60 * 24);
-  duration = Math.ceil(duration);
+  let durationTime = (returnDateTime - departDateTime) / (1000 * 60 * 60 * 24);
+  durationTime = Math.ceil(durationTime);
 
   //Distance
-  let distance = document.getElementById("distanceText").innerHTML;
-  distance = parseInt(distance.replace(" km", ""));
+  let drivingDistance = document.getElementById("distanceText").innerHTML;
+  drivingDistance = parseInt(drivingDistance.replace(" km", ""));
 
-  showResultContainer(passengers, duration, distance);
+  showResultContainer(passengerNumber, durationTime, drivingDistance);
 }
 
 // Convert date from date picker to YYYY/MM/DD  //
-
 function convertDateTime(date, time) {
   const dateArr = date.split("/");
   const day = dateArr[0];
@@ -58,7 +55,6 @@ function convertDateTime(date, time) {
 }
 
 // Transport options within an array //
-
 const transport = [
   {
     id: 0,
@@ -106,9 +102,9 @@ const transport = [
   },
 ];
 
-// Loop through Transport object (inside of an array) defined by user input and create elements (div) so to print on html about transport specifications i.e capacity, fuel consumption and etc
+// Loop through Transport object (inside of an array) defined by user input and create elements (div) so to print in html about transport specifications i.e capacity, fuel consumption and etc
 const results = document.querySelector("#ResultContainer");
-for (let index in transport) {
+for (let index of Object.keys(transport)) {
   const option = transport[index];
   const optionContainer = document.createElement("div");
   const vehicle = `<strong>${option.Vehicle}</strong>`;
@@ -118,8 +114,8 @@ for (let index in transport) {
   const fuel = `Fuel: ${option.Fuel}L / 100km`;
   const imagePath = option.Image;
 
+  //Add image and append to optionContainer element
   let inner = "";
-  //Add image and append
   const image = document.createElement("img");
   image.setAttribute("src", imagePath);
   image.setAttribute("alt", option.Vehicle);
@@ -149,10 +145,9 @@ for (let index in transport) {
 }
 
 // Function to display results (passengers, duration & distance) //
-
 function showResultContainer(passengers, duration, distance) {
   //filter through results
-  for (let index in transport) {
+  for (let index of Object.keys(transport)) {
     const option = transport[index];
     const minPassengers = option.MinPassengers;
     const maxPassengers = option.MaxPassengers;
@@ -160,7 +155,7 @@ function showResultContainer(passengers, duration, distance) {
     const minPeriod = option.MinRentalPeriod;
     const maxPeriod = option.MaxRentalPeriod;
     const fuel = option.Fuel;
-    //Filter through results (boolean) and print answer for user
+    //Filter through results (boolean) and print results for user
     if (
       passengers < minPassengers ||
       passengers > maxPassengers ||
