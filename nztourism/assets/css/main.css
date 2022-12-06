@@ -25,8 +25,8 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--white);
+  color: var(--darker);
   min-height: 100vh;
 }
 
@@ -51,7 +51,7 @@ h4 {
 
 h5 {
   font-weight: 700;
-  color: #ffffff;
+  color: var(--white);
   margin-top: 1.25rem;
   margin-top: 0.625rem;
 }
@@ -234,7 +234,7 @@ form {
   padding: 1.25rem;
   width: 100%;
   height: auto;
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 
 #ResultContainer img {
@@ -288,7 +288,7 @@ form .error {
 .footer-container {
   display: flex;
   flex-wrap: wrap;
-  background-color: #000000;
+  background-color: var(--darker);
   justify-content: space-around;
   padding-bottom: 1.25rem;
 }
@@ -320,7 +320,7 @@ form .error {
 
 /* Styling for links */
 .footer-column a {
-  color: #ffffff;
+  color: var(--white);
   text-decoration: none;
   padding-bottom: 0.3125rem;
   font-weight: 400;
