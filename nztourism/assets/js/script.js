@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 // Fuction to get values from itinery input fields and display the results of Transport options //
 function getValShowResult() {
-  // Get values from the form and call showResultContainer function
+  // Get values from the form
   const departDate = $("#startDate").val();
   const returnDate = $("#endDate").val();
   const passengerNumber = $("#passengers").val();
@@ -41,7 +41,7 @@ function getValShowResult() {
   //Distance
   let drivingDistance = document.getElementById("distanceText").innerHTML;
   drivingDistance = parseInt(drivingDistance.replace(" km", ""));
-
+  //Call results
   showResultContainer(passengerNumber, durationTime, drivingDistance);
 }
 
@@ -155,7 +155,7 @@ function showResultContainer(passengers, duration, distance) {
     const minPeriod = option.MinRentalPeriod;
     const maxPeriod = option.MaxRentalPeriod;
     const fuel = option.Fuel;
-    //Filter through results (boolean) and print results for user
+    //Return values (boolean OR operator) display results
     if (
       passengers < minPassengers ||
       passengers > maxPassengers ||
@@ -223,13 +223,6 @@ let autocomplete1;
 let input2 = document.getElementById("to");
 let autocomplete2;
 
-// Wait for page to load and once ready initialise google maps
-$(document).ready(function () {
-  initMap();
-  // Bind directions renderer to the map
-  directionsDisplay.setMap(map);
-});
-
 // Create a function to initialise a new map with map options and set a starting marker on the map
 function initMap() {
   // New map
@@ -248,7 +241,12 @@ function initMap() {
   autocomplete1 = new google.maps.places.Autocomplete(input1, options);
   autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 }
-
+// Wait for page to load and once ready initialise google maps
+$(document).ready(function () {
+  initMap(map);
+  // Set Map
+  directionsDisplay.setMap(map);
+});
 // function to calc distance
 function calcRoute() {
   // Create request
