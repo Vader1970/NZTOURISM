@@ -270,7 +270,10 @@ function calcRoute() {
       let fromVal = document.getElementById("from").value;
       let toVal = document.getElementById("to").value;
       let outputContent =
-        "<div class='alert-info'> From: " + fromVal + ".<br/> To: " + toVal;
+        "<div class='travel-distance-results'> From: " +
+        fromVal +
+        ".<br/> To: " +
+        toVal;
       outputContent +=
         ". <br/> Driving distance: " +
         distance +

@@ -197,7 +197,7 @@ form {
 }
 
 /* Styling for Validation Error Messages when required input from the user is missed (left blank)  */
-.alert-info {
+.travel-distance-results {
   width: 100%;
   background-color: var(--white);
   color: var(--darker);
