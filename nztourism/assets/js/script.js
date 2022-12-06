@@ -24,7 +24,7 @@ $(document).ready(function () {
   });
 });
 
-// Fuction to get values from itinery input fields and display the results of Transport options //
+// Fuction to get values from itinery input fields
 function getValShowResult() {
   // Get values from the form
   const departDate = $("#startDate").val();
