@@ -1,3 +1,4 @@
+/* Global settings */
 :root {
   --white: #ffffff;
   --darker: #171717;
@@ -29,6 +30,8 @@ body {
   color: var(--darker);
   min-height: 100vh;
 }
+
+/* Typography */
 
 h2 {
   color: var(--darker);
@@ -100,6 +103,7 @@ p {
     font-size: 0.5rem;
   }
 }
+
 /* Styling to insert picture of Mt Cook and align header text center */
 .main-header {
   background-image: url(../images/mt_cook.jpg);
@@ -206,7 +210,7 @@ form {
   border-radius: 0.3125rem;
 }
 
-/* Results Area */
+/* Results Areas */
 .results {
   display: none;
   margin-top: 4rem;
@@ -284,7 +288,7 @@ form .error {
   font-weight: 400;
 }
 
-/* Flex wrapper (layout) inside Grid */
+/* Flex wrapper for footer */
 .footer-container {
   display: flex;
   flex-wrap: wrap;

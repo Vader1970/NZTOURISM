@@ -12,7 +12,7 @@
   <meta name="author" content="Dan Wilkey, daniel.wilkey@gmail.com" />
   <meta name="rating" content="General" />
 
-  <script async defer
+  <script defer
     src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
@@ -36,6 +36,7 @@
         <a class="nz-tourism-style" href="https://www.newzealand.com/nz/">new zealand tourism</a>
       </div>
     </div>
+
     <!-- Main Header -->
     <div class="main-header">
       <h1>New Zealand Tourism</h1>
@@ -49,6 +50,7 @@
         below
       </h4>
     </section>
+
     <!-- itinery section  -->
     <section class="itinery-wrapper">
       <div class="itinery-form">
@@ -56,6 +58,7 @@
         <div>
           <div>
             <form class="form-labels-styling" name="myForm" id="myForm">
+
               <!-- startDate calendar -->
               <div class="form-group">
                 <div class="form-row">
@@ -68,6 +71,7 @@
                   </div>
                 </div>
               </div>
+
               <!-- endDate calendar -->
               <div class="form-group">
                 <div class="form-row">
@@ -80,6 +84,7 @@
                   </div>
                 </div>
               </div>
+
               <!-- passenger selector -->
               <div class="form-group">
                 <div class="form-row">
@@ -100,6 +105,7 @@
                   </div>
                 </div>
               </div>
+
               <!-- Origin - from location -->
               <div class="form-group">
                 <div class="form-row">
@@ -112,6 +118,7 @@
                   </div>
                 </div>
               </div>
+
               <!-- Destination - to location -->
               <div class="form-group">
                 <div class="form-row">
@@ -126,25 +133,28 @@
               </div>
             </form>
             <div>
-              <!-- Call calcRoute function inside form-validation.js - else return validation errors  -->
+
+              <!-- Call calcRoute function inside form-validation.js -->
               <button id="submitBtn" class="btn btn-info btn-lg">
                 Search transport
               </button>
             </div>
-            <!-- div to show results for From:, To:, Driving distance and Duration: from google maps API -->
+
+            <!-- div to show results for From:, To:, Driving distance and Duration-->
             <div id="output"></div>
           </div>
         </div>
       </div>
+
       <!-- To display googleMap area -->
       <div id="googleMap"></div>
     </section>
+
     <!-- Results area for list of Transport define by user input-->
     <section class="results">
       <h2>results</h2>
       <div id="ResultContainer"></div>
     </section>
-
     </form>
     </section>
   </main>
