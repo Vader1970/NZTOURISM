@@ -32,7 +32,7 @@ function getValShowResult() {
   const returnDate = $('#endDate').val();
   const passengerNumber = $('#passengers').val();
 
-  //Standardize time and and format for NZ
+  //Standardize time and format for NZ
   const departDateTime = new Date(convertDateTime(departDate, '10:00'));
   const returnDateTime = new Date(convertDateTime(returnDate, '10:00'));
 
@@ -70,9 +70,10 @@ const transport = [
     Fuel: 3.7,
     Image: './assets/images/bikesm.jpg',
   },
+
   {
     id: 1,
-    Vehicle: 'Small car',
+    Vehicle: 'Small Car',
     MinPassengers: 1,
     MaxPassengers: 2,
     PricePerDay: 129,
@@ -81,9 +82,10 @@ const transport = [
     Fuel: 8.5,
     Image: './assets/images/mustangsm.jpg',
   },
+
   {
     id: 2,
-    Vehicle: 'Large car',
+    Vehicle: 'Large Car',
     MinPassengers: 1,
     MaxPassengers: 5,
     PricePerDay: 144,
@@ -92,9 +94,10 @@ const transport = [
     Fuel: 9.7,
     Image: './assets/images/large_carsm.jpg',
   },
+
   {
     id: 3,
-    Vehicle: 'Motor home',
+    Vehicle: 'Motorhome',
     MinPassengers: 2,
     MaxPassengers: 6,
     PricePerDay: 200,
@@ -111,10 +114,10 @@ for (let index of Object.keys(transport)) {
   const option = transport[index];
   const optionContainer = document.createElement('div');
   const vehicle = `<strong>${option.Vehicle}</strong>`;
-  const capacity = `Capacity: ${option.MinPassengers}-${option.MaxPassengers} people`;
-  const period = `min ${option.MinRentalPeriod} days / max ${option.MaxRentalPeriod} days`;
-  const price = `$${option.PricePerDay} / day`;
-  const fuel = `Fuel: ${option.Fuel}L / 100km`;
+  const capacity = `<strong>Capacity:</strong> ${option.MinPassengers}-${option.MaxPassengers} people`;
+  const period = `<strong>Rental Period:</strong> min ${option.MinRentalPeriod} / max ${option.MaxRentalPeriod} days`;
+  const price = `<strong>Rental Hire:</strong> ${option.PricePerDay} / day`;
+  const fuel = `<strong>Fuel Economy:</strong> ${option.Fuel}L / 100km`;
   const imagePath = option.Image;
 
   //Add image and append to optionContainer element
@@ -196,7 +199,7 @@ function showResultContainer(passengers, duration, distance) {
       ).textContent = `Fuel: $${totalFuelCost} approx. (${totalFuel}L)`;
     document
       .querySelector(`#transport${option.id}`)
-      .querySelector('#Total').textContent = `Total cost: $${total} approx.`;
+      .querySelector('#Total').textContent = `Total Cost: $${total} approx.`;
   }
   $('.results').show();
   $('.form-control').change(function () {
@@ -266,7 +269,7 @@ $(document).ready(function () {
   directionsDisplay.setMap(map);
 });
 
-// function to calc route
+// Function to calc route
 function calcRoute() {
   // Create  a new request
   let request = {
@@ -288,14 +291,14 @@ function calcRoute() {
       let fromVal = document.getElementById('from').value;
       let toVal = document.getElementById('to').value;
       let outputContent =
-        "<div class='travel-distance-results'> From: " +
+        "<div class='travel-distance-results'> <strong>From:</strong> " +
         fromVal +
-        '.<br/> To: ' +
+        '.<br/> <strong>To:</strong> ' +
         toVal;
       outputContent +=
-        '. <br/> Driving distance: ' +
+        '. <br/> <strong>Driving distance:</strong> ' +
         distance +
-        '.<br />Duration: ' +
+        '.<br /><strong>Duration:</strong> ' +
         duration +
         '. </div>';
 
