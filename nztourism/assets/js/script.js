@@ -1,4 +1,7 @@
-/// Date Range Picker Function (jQuery plugin) to select Depart: '#startDate' and Return: '#endDate' from a drop-down calendar //
+//Informs JSHint that the code uses ECMAScript 6 (ES6) syntax
+/*jshint esversion: 6 */
+
+/// Date Range Picker Function (jQuery Library) to select Depart: '#startDate' and Return: '#endDate' from a drop-down calendar //
 
 //Depart date
 $(document).ready(function () {
@@ -32,7 +35,7 @@ function getValShowResult() {
   const returnDate = $('#endDate').val();
   const passengerNumber = $('#passengers').val();
 
-  //Standardize time and format for NZ
+  //Standardize time and format and store in variable
   const departDateTime = new Date(convertDateTime(departDate, '10:00'));
   const returnDateTime = new Date(convertDateTime(returnDate, '10:00'));
 
@@ -57,7 +60,7 @@ function convertDateTime(date, time) {
   return year + '/' + month + '/' + day + ' ' + time;
 }
 
-// Transport options within an array //
+// Transport options specifications //
 const transport = [
   {
     id: 0,
@@ -108,8 +111,9 @@ const transport = [
   },
 ];
 
-// Create element div.ResultContainer and add elements from transport object keys
+// Create element div.ResultContainer and add elements from transport object keys based on user input
 const results = document.querySelector('#ResultContainer');
+
 for (let index of Object.keys(transport)) {
   const option = transport[index];
   const optionContainer = document.createElement('div');
@@ -121,27 +125,27 @@ for (let index of Object.keys(transport)) {
   const imagePath = option.Image;
 
   //Add image and append to optionContainer element
-  let inner = '';
-  const image = document.createElement('img');
-  image.setAttribute('src', imagePath);
-  image.setAttribute('alt', option.Vehicle);
-  optionContainer.appendChild(image);
+  let transportSpecs = ' ';
+  const vehicleImage = document.createElement('img');
+  vehicleImage.setAttribute('src', imagePath);
+  vehicleImage.setAttribute('alt', option.Vehicle);
+  optionContainer.appendChild(vehicleImage);
 
-  //Add info
+  //Add Transport Specifications
   const infoArr = [vehicle, capacity, period, price, fuel];
   infoArr.forEach(arrayItem => {
-    inner += arrayItem + '<br>';
+    transportSpecs += arrayItem + '<br>';
   });
 
-  //Create element for info
+  //Create element for Transport Specifications
   const info = document.createElement('p');
-  info.innerHTML = inner;
+  info.innerHTML = transportSpecs;
   optionContainer.appendChild(info);
 
-  //Add id
+  //Set the value attribute id to element optionContainer
   optionContainer.setAttribute('id', `transport${option.id}`);
 
-  //Add cost info
+  //Create elements to add cost info
   const totalPrice = document.createElement('p');
   totalPrice.setAttribute('id', 'TotalPrice');
   const totalFuel = document.createElement('p');
@@ -158,7 +162,7 @@ for (let index of Object.keys(transport)) {
 
 // Function to display results//
 function showResultContainer(passengers, duration, distance) {
-  //Defacture and assign transport object keys to constant variables
+  //Assign transport object keys to constant variables
   for (let index of Object.keys(transport)) {
     const option = transport[index];
     const minPassengers = option.MinPassengers;
@@ -182,7 +186,7 @@ function showResultContainer(passengers, duration, distance) {
         .style.removeProperty('display');
     }
 
-    //Calculate & show total price & fuel consumption
+    //Calculate total price & fuel consumption and show results
     const totalPrice = price * duration;
     const totalFuel = Math.round((fuel * distance) / 100);
     const totalFuelCost = Math.round(2.68 * totalFuel);
@@ -232,11 +236,11 @@ let options = {
   types: ['(cities)'],
 };
 
-// Create input1 variable to store 'from' value for autocomplete1
+// Get start of 'from' input so to activate autocomplete feature
 let input1 = document.getElementById('from');
 let autocomplete1;
 
-// Create input2 variable to store 'to' value for autocomplete2
+// Get start of 'from' input so to activate autocomplete feature
 let input2 = document.getElementById('to');
 let autocomplete2;
 
@@ -282,7 +286,7 @@ function calcRoute() {
   // Pass created request to route method
   directionsService.route(request, (result, status) => {
     if (status == google.maps.DirectionsStatus.OK) {
-      // Get distance and time values and display on map
+      // Get distance and time values and display in travel-distance-results created element
       let distance =
         '<span id="distanceText">' +
         result.routes[0].legs[0].distance.text +

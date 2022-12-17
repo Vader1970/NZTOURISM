@@ -33,7 +33,7 @@ body {
 
 /* Typography */
 h1 {
-  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
@@ -47,7 +47,7 @@ h2 {
 
 h3 {
   color: var(--dark);
-  font-size: 1.65rem;
+  font-size: 1.625rem;
   font-weight: 700;
   margin: 0;
 }
@@ -63,7 +63,7 @@ h4 {
 h5 {
   font-weight: 700;
   color: var(--white);
-  margin-top: 1.25rem;
+  margin-top: 1rem;
   margin-top: 0.625rem;
 }
 
@@ -208,7 +208,7 @@ form {
   min-height: 18.75rem;
 }
 
-/* Styling for Validation Error Messages when required input from the user is missed (left blank)  */
+/* Styling for 'From', 'To', Driving distnce and duration box that appears under Search Transport button */
 .travel-distance-results {
   width: 100%;
   background-color: var(--white);
@@ -218,7 +218,7 @@ form {
   border-radius: 0.3125rem;
 }
 
-/* Results Areas */
+/* Styling Results section for Vehicle Options and specification data selected by user. Only displays if there are results to be returned*/
 .results {
   display: none;
   margin-top: 1.25rem;
@@ -226,6 +226,7 @@ form {
   padding: 0 1.25rem;
 }
 
+/* Grid layout and styling for Vehicle Options based on user input */
 #ResultContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -304,6 +305,7 @@ form .error {
   background-color: var(--darker);
   justify-content: space-around;
   padding-bottom: 1.25rem;
+  margin-top: 1.25rem;
 }
 
 /* Media query to change links in footer to a single column */
