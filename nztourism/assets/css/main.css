@@ -95,6 +95,16 @@ p {
   color: var(--darker);
 }
 
+/* Styling for Top Black Nav Bar */
+.top-of-page-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem;
+  background-color: var(--darker);
+}
+
 /* Styling for Top Black Nav Bar elements */
 .nz-tourism-style {
   color: var(--white);
