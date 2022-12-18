@@ -7,12 +7,14 @@
   --red: #ff0000;
 }
 
+/* Set default box sizing and font styles for the entire document */
 html {
   box-sizing: border-box;
   font-size: 100%;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Make all elements, including pseudo-elements, inherit box-sizing and reset margin and padding */
 *,
 *::before,
 *::after {
@@ -21,6 +23,7 @@ html {
   padding: 0;
 }
 
+/* Set basic styles for the body element */
 body {
   display: flex;
   flex-direction: column;
@@ -28,14 +31,15 @@ body {
   padding: 0;
   background-color: var(--white);
   color: var(--darker);
-  min-height: 100vh;
+  min-height: 100vh; /* make body element take up at least the full height of the viewport */
 }
 
-/* Typography */
+/* Typography styles */
 h1 {
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Style for h2 elements */
 h2 {
   color: var(--darker);
   font-size: 2.5rem;
@@ -45,6 +49,7 @@ h2 {
   margin: 0;
 }
 
+/* Style for h3 elements */
 h3 {
   color: var(--dark);
   font-size: 1.625rem;
@@ -52,6 +57,7 @@ h3 {
   margin: 0;
 }
 
+/* Style for h4 elements */
 h4 {
   font-size: 1.5rem;
   font-weight: 400;
@@ -60,6 +66,7 @@ h4 {
   margin-right: 1.25rem;
 }
 
+/* Style for h5 elements */
 h5 {
   font-weight: 700;
   color: var(--white);
@@ -67,11 +74,13 @@ h5 {
   margin-top: 0.625rem;
 }
 
+/* Style the first letter of h4 and h5 elements */
 h4::first-letter,
 h5::first-letter {
   text-transform: uppercase;
 }
 
+/* Style input and label elements */
 input,
 label {
   text-transform: capitalize;
@@ -81,18 +90,9 @@ label {
   font-weight: 700;
 }
 
+/* Style p elements */
 p {
   color: var(--darker);
-}
-
-/* Styling for Top Black Nav Bar */
-.top-of-page-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.625rem;
-  background-color: var(--darker);
 }
 
 /* Styling for Top Black Nav Bar elements */

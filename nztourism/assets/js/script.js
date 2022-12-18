@@ -266,7 +266,6 @@ destinationAutoComplete = new google.maps.places.Autocomplete(
 
 // The initMap function is then defined, which initializes the map by creating a new Google Maps map object and rendering it to the googleMap element on the page. It also creates new Google Maps Directions Service and Directions Renderer objects, and initializes the Autocomplete objects for the origin and destination inputs using the options defined earlier.
 function initMap() {
-  // Create a map
   map = new google.maps.Map(document.getElementById('googleMap'), {
     // Map latitude and longitude for New Zealand and type ROADMAP
     zoom: 5.2,
