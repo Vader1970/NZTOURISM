@@ -1,9 +1,9 @@
 //Informs JSHint that the code uses ECMAScript 6 (ES6) syntax
 /*jshint esversion: 6 */
 
-/// Date Range Picker Function (jQuery Library) to select Depart: '#startDate' and Return: '#endDate' from a drop-down calendar //
+/// This code uses the datepicker function from the jQuery UI library to create two drop-down calendars for selecting a departure date and a return date.
 
-//Depart date
+//The #startDate calendar is set to display a single month and the #endDate calendar is also set to display a single month. The minimum date that can be selected in both calendars is the current date, as determined by the minDate option. The calendars are also set to display the selected dates in the format 'dd/mm/yy' using the dateFormat option.
 $(document).ready(function () {
   let minDate = new Date();
   $('#startDate').datepicker({
@@ -16,7 +16,7 @@ $(document).ready(function () {
     },
   });
 
-  //Return Date
+  //The onClose function is called whenever the user closes the calendar after selecting a date. For the #startDate calendar, the onClose function sets the minimum date that can be selected in the #endDate calendar to the selected departure date. This ensures that the return date cannot be set to a date earlier than the departure date. Similarly, for the #endDate calendar, the onClose function sets the maximum date that can be selected in the #startDate calendar to the selected return date. This ensures that the departure date cannot be set to a date later than the return date.
   $('#endDate').datepicker({
     showAnim: 'drop',
     numberOfMonth: 1,
@@ -28,39 +28,36 @@ $(document).ready(function () {
   });
 });
 
-// Get values from itinery input fields
+//This function is calculating the duration of a rental period based on start date and an end date, and using that duration along with the number of passengers and the distance to call a showResultContainer function.
 function getValShowResult() {
-  // Get values from the itinery form startDate, endDate and number of passengers
-  const departDate = $('#startDate').val();
-  const returnDate = $('#endDate').val();
-  const passengerNumber = $('#passengers').val();
+  // The values of the departDate, returnDate, and passengerNumber form fields are being retrieved using document.getElementById() and stored in variables.
+  const departDate = document.getElementById('startDate').value;
+  const returnDate = document.getElementById('endDate').value;
+  const passengerNumber = document.getElementById('passengers').value;
 
-  //Standardize time and format and store in variable
+  //The departDateTime and returnDateTime variables are being set to new Date objects that are created using the convertDateTime() function and passed the departDate and returnDate variables as arguments, along with the string '10:00' to set the time to 10:00 AM.
   const departDateTime = new Date(convertDateTime(departDate, '10:00'));
   const returnDateTime = new Date(convertDateTime(returnDate, '10:00'));
 
-  //Calculate rental period from dates selected
+  //The duration of the rental period is being calculated by taking the difference between the returnDateTime and departDateTime in milliseconds, dividing by the number of milliseconds in a day, and then using Math.ceil() to round up to the nearest whole number. This duration is stored in the durationTime variable.
   let durationTime = (returnDateTime - departDateTime) / (1000 * 60 * 60 * 24);
   durationTime = Math.ceil(durationTime);
 
-  //Get value for distance from element 'distanceText'. Calculation done by Distance Matrix API.
-  let drivingDistance = document.getElementById('distanceText').innerHTML;
-  // Change to integer
-  drivingDistance = parseInt(drivingDistance.replace(' km', ''));
-  //Call results
-  showResultContainer(passengerNumber, durationTime, drivingDistance);
+  //The driving distance is being retrieved from an element with the id distanceText and stored in the drivingDistance variable. This value is then converted to an integer and stored in the distance variable.
+  const drivingDistance = document.getElementById('distanceText').innerHTML;
+  const distance = parseInt(drivingDistance);
+
+  //The showResultContainer() function is being called and passed the passengerNumber, durationTime, and distance variables as arguments.
+  showResultContainer(passengerNumber, durationTime, distance);
 }
 
-// Convert date from date picker to YYYY/MM/DD  //
+// This function takes in two strings as arguments: date and time. It splits the date string into an array of three strings using the / character as the delimiter. It then destructures the array into three variables: day, month, and year. Finally, it returns a new string that combines the year, month, day, and time variables in the format "YYYY/MM/DD HH:MM".
 function convertDateTime(date, time) {
-  const dateArr = date.split('/');
-  const day = dateArr[0];
-  const month = dateArr[1];
-  const year = dateArr[2];
-  return year + '/' + month + '/' + day + ' ' + time;
+  const [day, month, year] = date.split('/');
+  return `${year}/${month}/${day} ${time}`;
 }
 
-// Transport options specifications //
+// An array of objects that represent different types of vehicles that are available for rental. Each object has several properties, such as Vehicle, MinPassengers, MaxPassengers, PricePerDay, MinRentalPeriod, MaxRentalPeriod, Fuel, and Image, that describe the specifications of each type of vehicle.
 const transport = [
   {
     id: 0,
@@ -111,100 +108,120 @@ const transport = [
   },
 ];
 
-// Create element div.ResultContainer and add elements from transport object keys based on user input
+// The selector #ResultContainer specifies that the element with the ID ResultContainer should be retrieved.
+// The element that is retrieved is stored in the results constant. This constant can then be used to access and manipulate the element in the rest of the code.
 const results = document.querySelector('#ResultContainer');
 
-for (let index of Object.keys(transport)) {
-  const option = transport[index];
-  const optionContainer = document.createElement('div');
+//This code is creating a series of div elements in the HTML DOM based on the keys of object transport. For each key, it creates a new div element called optionContainer and then calls a function called createTransportOption to add elements to this optionContainer based on the current transport option.The createTransportOption function takes the current transport option and the optionContainer element as arguments. It first creates a series of HTML elements representing different aspects of the transport option (e.g. vehicle, capacity, period, etc.), and then it creates an img element called vehicleImage and sets its src and alt attributes based on the option. It then appends the vehicleImage to the optionContainer element.
+function createTransportOption(option, optionContainer) {
   const vehicle = `<strong>${option.Vehicle}</strong>`;
   const capacity = `<strong>Capacity:</strong> ${option.MinPassengers}-${option.MaxPassengers} people`;
   const period = `<strong>Rental Period:</strong> min ${option.MinRentalPeriod} / max ${option.MaxRentalPeriod} days`;
   const price = `<strong>Rental Hire:</strong> ${option.PricePerDay} / day`;
   const fuel = `<strong>Fuel Economy:</strong> ${option.Fuel}L / 100km`;
   const imagePath = option.Image;
-
-  //Add image and append to optionContainer element
-  let transportSpecs = ' ';
   const vehicleImage = document.createElement('img');
+
   vehicleImage.setAttribute('src', imagePath);
   vehicleImage.setAttribute('alt', option.Vehicle);
   optionContainer.appendChild(vehicleImage);
 
-  //Add Transport Specifications
+  //This code is defining a variable called transportSpecs and assigning it an empty string. Then it defines an array called infoArr that contains five elements: vehicle, capacity, period, price, and fuel.
+  let transportSpecs = ' ';
+
   const infoArr = [vehicle, capacity, period, price, fuel];
+
+  // Next, the code uses the forEach() method to iterate over the elements in the infoArr array. For each element in the array, it concatenates the element to the transportSpecs string, separated by a line break. Note that the forEach() method does not return a value, so the transportSpecs variable will be modified directly within the function.
   infoArr.forEach(arrayItem => {
     transportSpecs += arrayItem + '<br>';
   });
 
-  //Create element for Transport Specifications
+  //Creates an HTML p element to hold the transport specifications and sets its innerHTML to the concatenation of the different transport specification elements. It then appends this p element to the optionContainer. Finally, it creates three more p elements with id attributes of TotalPrice, TotalFuel, and Total, and appends them to the optionContainer as well.
   const info = document.createElement('p');
   info.innerHTML = transportSpecs;
   optionContainer.appendChild(info);
 
-  //Set the value attribute id to element optionContainer
-  optionContainer.setAttribute('id', `transport${option.id}`);
-
-  //Create elements to add cost info
   const totalPrice = document.createElement('p');
   totalPrice.setAttribute('id', 'TotalPrice');
+
   const totalFuel = document.createElement('p');
   totalFuel.setAttribute('id', 'TotalFuel');
+
   const totalCost = document.createElement('p');
+
   totalCost.setAttribute('id', 'Total');
   optionContainer.appendChild(totalPrice);
   optionContainer.appendChild(totalFuel);
   optionContainer.appendChild(totalCost);
+}
 
-  //Append child optionContainer to results
+// The code then loops through the keys of the transport object using for (let index of Object.keys(transport)), and for each key it creates a new div element called optionContainer, sets its id attribute to transport${option.id}, and calls the createTransportOption function to add elements to it.
+for (let index of Object.keys(transport)) {
+  const option = transport[index];
+  const optionContainer = document.createElement('div');
+  optionContainer.setAttribute('id', `transport${option.id}`);
+
+  createTransportOption(option, optionContainer);
+
+  //Finally, it appends the optionContainer to the #ResultContainer element in the HTML DOM.
   results.appendChild(optionContainer);
 }
 
-// Function to display results//
+// This function displays the results of transportation cost calculation based on several input parameters:
+// -passengers: the number of passengers.
+// -duration: the length of time for which the transportation will be used.
+// -distance: the distance the transportation will be used for.
+// The function first loops through the transport object and retrieves several values for each option:
+// -minPassengers: the minimum number of passengers allowed for this option.
+// -maxPassengers: the maximum number of passengers allowed for this option.
+// -price: the price per day for this option.
+// -minPeriod: the minimum rental period for this option.
+// -maxPeriod: the maximum rental period for this option.
+// -fuel: the fuel consumption rate for this option.
 function showResultContainer(passengers, duration, distance) {
-  //Assign transport object keys to constant variables
+  //Loops through the keys of the transport object and assigns the corresponding value to the option variable.
   for (let index of Object.keys(transport)) {
     const option = transport[index];
-    const minPassengers = option.MinPassengers;
-    const maxPassengers = option.MaxPassengers;
-    const price = option.PricePerDay;
-    const minPeriod = option.MinRentalPeriod;
-    const maxPeriod = option.MaxRentalPeriod;
-    const fuel = option.Fuel;
+    // Object called optionValues that contains several properties extracted from the option object.
+    const optionValues = {
+      minPassengers: option.MinPassengers,
+      maxPassengers: option.MaxPassengers,
+      price: option.PricePerDay,
+      minPeriod: option.MinRentalPeriod,
+      maxPeriod: option.MaxRentalPeriod,
+      fuel: option.Fuel,
+    };
 
-    //Filter through conditions and if conditions are true show results
-    if (
-      passengers < minPassengers ||
-      passengers > maxPassengers ||
-      duration < minPeriod ||
-      duration > maxPeriod
-    ) {
+    // It then filters out any options that do not meet the criteria for the input passengers, duration, and distance, by setting the display style of the corresponding element to 'none' if the criteria are not met.
+    const shouldHide =
+      passengers < optionValues.minPassengers ||
+      passengers > optionValues.maxPassengers ||
+      duration < optionValues.minPeriod ||
+      duration > optionValues.maxPeriod;
+    if (shouldHide) {
       document.querySelector(`#transport${option.id}`).style.display = 'none';
     } else {
-      document
-        .querySelector(`#transport${option.id}`)
-        .style.removeProperty('display');
+      document.querySelector(`#transport${option.id}`).style.display = 'block';
     }
 
-    //Calculate total price & fuel consumption and show results
-    const totalPrice = price * duration;
-    const totalFuel = Math.round((fuel * distance) / 100);
+    // The function then calculates the total price, fuel consumption, and total cost for each option that has not been filtered out. It does this by multiplying the price by the duration to get the total price, and using the fuel and distance to calculate the total fuel consumption and cost.
+    const totalPrice = optionValues.price * duration;
+    const totalFuel = Math.round((optionValues.fuel * distance) / 100);
     const totalFuelCost = Math.round(2.68 * totalFuel);
     const total = totalPrice + totalFuelCost;
-    document
-      .querySelector(`#transport${option.id}`)
-      .querySelector(
-        '#TotalPrice'
-      ).textContent = `Price (${duration} days): $${totalPrice}`;
-    document
-      .querySelector(`#transport${option.id}`)
-      .querySelector(
-        '#TotalFuel'
-      ).textContent = `Fuel: $${totalFuelCost} approx. (${totalFuel}L)`;
-    document
-      .querySelector(`#transport${option.id}`)
-      .querySelector('#Total').textContent = `Total Cost: $${total} approx.`;
+
+    // Finally, it updates the text content of several elements to display the results.
+    document.querySelector(
+      `#transport${option.id} #TotalPrice`
+    ).textContent = `Price (${duration} days): $${totalPrice}`;
+    document.querySelector(
+      `#transport${option.id} #TotalFuel`
+    ).textContent = `Fuel: $${totalFuelCost} approx. (${totalFuel}L)`;
+    document.querySelector(
+      `#transport${option.id} #Total`
+    ).textContent = `Total Cost: $${total} approx.`;
   }
+
   $('.results').show();
   $('.form-control').change(function () {
     getValShowResult();
@@ -221,72 +238,69 @@ function showResultContainer(passengers, duration, distance) {
 //Distance Matrix API
 //Places API
 
-// Create variable for map
+// This code is for Google Maps API that allows a user to enter a starting location and a destination, and then displays the route on a map, as well as the driving distance and duration between the two points.
+// The code starts by declaring three variables: map, directionsService, and directionsDisplay. These variables will be used to store the Google Maps map object, the Google Maps Directions Service object, and the Google Maps Directions Renderer object, respectively.
 let map;
-
-// Create directionsService variable
 let directionsService;
-
-// Create directionsrenderer variable
 let directionsDisplay;
 
-// Create autocomplete features for Origin and Destination inputs specifically for NZ cities
-let options = {
+// Next, the code defines the options object, which will be used to restrict the origin and destination inputs to New Zealand cities and provide autocomplete suggestions for the user as they type in the origin and destination fields.
+const options = {
   componentRestrictions: { country: 'NZ' },
   types: ['(cities)'],
 };
 
-// Get start of 'from' input so to activate autocomplete feature
-let input1 = document.getElementById('from');
-let autocomplete1;
+// Autocomplete feature, which will be used to provide autocomplete suggestions for the user as they type in the origin and destination fields
+const originInput = document.getElementById('from');
+let originAutoComplete;
 
-// Get start of 'from' input so to activate autocomplete feature
-let input2 = document.getElementById('to');
-let autocomplete2;
+const destinationInput = document.getElementById('to');
+let destinationAutoComplete;
 
-// Create a function to initialise map
+// The code then gets references to the originInput and destinationInput elements on the page, which are the input fields for the origin and destination locations. It also declares originAutoComplete and destinationAutoComplete variables, which will be used to store the Autocomplete objects for the origin and destination inputs, respectively.
+originAutoComplete = new google.maps.places.Autocomplete(originInput, options);
+destinationAutoComplete = new google.maps.places.Autocomplete(
+  destinationInput,
+  options
+);
+
+// The initMap function is then defined, which initializes the map by creating a new Google Maps map object and rendering it to the googleMap element on the page. It also creates new Google Maps Directions Service and Directions Renderer objects, and initializes the Autocomplete objects for the origin and destination inputs using the options defined earlier.
 function initMap() {
   // Create a map
   map = new google.maps.Map(document.getElementById('googleMap'), {
-    // Map lattitude and longitude for New Zealand and type ROADMAP
+    // Map latitude and longitude for New Zealand and type ROADMAP
     zoom: 5.2,
     center: { lat: -41.2924, lng: 174.7787 },
-    mapTypeid: google.maps.MapTypeId.ROADMAP,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
   });
 
-  // Call Direction service object form Google Map API
   directionsService = new google.maps.DirectionsService();
 
-  //Render the direction object
   directionsDisplay = new google.maps.DirectionsRenderer();
-
-  // Add autocomplete functions to the 'from' and 'to' input boxes
-  autocomplete1 = new google.maps.places.Autocomplete(input1, options);
-  autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 }
 
-// Wait for page to load and once ready initialise google maps
+// The $(document).ready function waits for the page to load, and then calls the initMap function.
 $(document).ready(function () {
   initMap();
 
-  // Display the directions on the map by binding the directions service to the map service
+  // directionsDisplay.setMap(map) is a method of the Google Maps Directions Renderer object that is used to bind the Directions Renderer to the map. This means that the directions will be displayed on the map when they are returned from the Directions Service.
   directionsDisplay.setMap(map);
 });
 
-// Function to calc route
+// The calcRoute function is called when the user clicks 'Search Transport'. The function is used to calculate and display the route between the origin and destination locations on the map, as well as the driving distance and duration between the two points.
 function calcRoute() {
-  // Create  a new request
-  let request = {
+  // Creates a new request object for the Google Maps Directions Service, which includes the origin and destination locations as well as the travel mode and unit system.
+  const routeRequest = {
     origin: document.getElementById('from').value,
     destination: document.getElementById('to').value,
     travelMode: google.maps.TravelMode.DRIVING,
     unitSystem: google.maps.UnitSystem.METRIC,
   };
 
-  // Pass created request to route method
-  directionsService.route(request, (result, status) => {
-    if (status == google.maps.DirectionsStatus.OK) {
-      // Get distance and time values and display in travel-distance-results created element
+  // Calls the route method of the Directions Service, passing in the request object and a callback function that will be executed when the directions are returned. The callback function has two arguments, result and status, which contain the result of the request (including the calculated route) and the status of the request, respectively.
+  directionsService.route(routeRequest, (result, status) => {
+    // If the directions are returned successfully (i.e., the status is google.maps.DirectionsStatus.OK), the callback function updates the page to display the driving distance and duration, and renders the route on the map using the Directions Renderer. The driving distance and duration are calculated by accessing the distance.text and duration.text properties of the result.routes[0].legs[0] object, respectively. The function also gets the values of the originInput and destinationInput elements and displays them on the page.
+    if (status === google.maps.DirectionsStatus.OK) {
       let distance =
         '<span id="distanceText">' +
         result.routes[0].legs[0].distance.text +
@@ -311,8 +325,10 @@ function calcRoute() {
       // Display the obtained route
       directionsDisplay.setDirections(result);
       getValShowResult();
+
+      //If there is an error retrieving the directions, the function displays an error message and removes the route from the map.
     } else {
-      // Delete route from map
+      // Remove route from map
       directionsDisplay.setDirections({ routes: [] });
 
       // Center map back to current position
